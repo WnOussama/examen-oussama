@@ -3,6 +3,8 @@ const http = require("http");
 const mongo = require("mongoose");
 const path = require("path");
 const userRouter = require("./routes/users");
+const bibliothequeRouter = require("./routes/bibliotheques");
+const livreRouter = require("./routes/livres");
 const { addchat } = require("./controller/userController");
 const db = require("./config/db.json");
 mongo
@@ -17,6 +19,8 @@ app.use(express.json());
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "twig");
 app.use("/users", userRouter);
+app.use("/bibliotheque", bibliothequeRouter);
+app.use("/livre", livreRouter);
 
 const server = http.createServer(app, console.log("server run"));
 const io = require("socket.io")(server);

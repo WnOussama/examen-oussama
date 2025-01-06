@@ -1,20 +1,18 @@
 const yup = require("yup");
 
-async function validateusers(req, res, next) {
+async function validateLivres(req, res, next) {
   try {
     const Schema = yup.object().shape({
-      username: yup
+      titre: yup
         .string()
-        .matches(/[A-Z][A-Z]/)
+        .matches(/[A-Z][A-Z][A-Z]/)
         .required(),
-      email: yup
+      auteur: yup
         .string()
         .email()
-        .matches(/@esprit.tn/)
         .required(),
-      cin: yup.number().required(),
+      date_publication: yup.date().required(),
     });
-
     await Schema.validate(req.body);
     next();
   } catch (err) {
@@ -39,4 +37,4 @@ async function validateresidence(req, res, next) {
     res.status(400).send(err);
   }
 }
-module.exports = { validateusers, validateresidence };
+module.exports = { validateLivres };
